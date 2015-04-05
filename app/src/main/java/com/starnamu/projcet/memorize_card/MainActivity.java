@@ -1,5 +1,6 @@
 package com.starnamu.projcet.memorize_card;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.AttributeSet;
 import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -80,7 +82,24 @@ public class MainActivity extends ActionBarActivity {
         getSupportActionBar().setCustomView(R.layout.toolbarstat);
         getSupportActionBar().setTitle("Custom Title");
         getSupportActionBar().setSubtitle("subtitle");
+        getSupportActionBar().setCustomView(new ToolbarTitle(this));
         getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+    }
+
+    class ToolbarTitle extends LinearLayout {
+
+        Context mContext;
+
+        public ToolbarTitle(Context context) {
+            super(context);
+            mContext = context;
+        }
+
+        public ToolbarTitle(Context context, AttributeSet attrs) {
+            super(context, attrs);
+            mContext = context;
+        }
     }
 
     /*
