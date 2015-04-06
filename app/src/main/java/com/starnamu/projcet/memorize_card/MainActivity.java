@@ -146,6 +146,8 @@ public class MainActivity extends ActionBarActivity {
     /**
      * 각항목에 값을 넣기위한 방법으로 지우지말고 시용
      * 각항목에 값을 넣기위한 방법으로 지우지말고 시용
+     * 각항목에 값을 넣기위한 방법으로 지우지말고 시용
+     * 각항목에 값을 넣기위한 방법으로 지우지말고 시용
      */
     public void createData() {
         Group group = new Group("설정" + 1);
