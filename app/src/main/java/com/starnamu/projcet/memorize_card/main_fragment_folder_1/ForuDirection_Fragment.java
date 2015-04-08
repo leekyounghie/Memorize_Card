@@ -1,4 +1,4 @@
-package com.starnamu.projcet.memorize_card.main_fragment_folder;
+package com.starnamu.projcet.memorize_card.main_fragment_folder_1;
 
 import android.app.Fragment;
 import android.content.Context;
@@ -14,7 +14,6 @@ import android.widget.FrameLayout;
 import android.widget.Scroller;
 import android.widget.TextView;
 
-
 import com.starnamu.projcet.memorize_card.R;
 
 import java.util.ArrayList;
@@ -23,36 +22,36 @@ import java.util.ArrayList;
  * Created by starnamu on 2015-03-31.
  */
 public class ForuDirection_Fragment extends Fragment {
-    /**
-     * 카드를 담을수 있는 ArrayList 입니다.
-     */
+
     ArrayList<View> arrayList = new ArrayList<View>();
 
+    ArrayList<WordCard> cardArray;
+    WordCard wCard;
+
     public ForuDirection_Fragment() {
+        cardArray = new ArrayList<WordCard>();
+        cardArray.add(new WordCard("left", "왼쪽", 1));
+        cardArray.add(new WordCard("right", "오른쪽", 2));
+        cardArray.add(new WordCard("top", "천장", 3));
+        cardArray.add(new WordCard("bottom", "바닥", 4));
+        cardArray.add(new WordCard("view", "보다", 5));
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        /**Inflation을 할수있는 inflater객체 root를 생성합니다.*/
         View root = inflater.inflate(R.layout.counterfragment, container, false);
 
-        /**ViewPager가 구현된 1패이지 FourDirectionLayout(사용자 정의)을 생성합니다.*/
         FourDirectionLayout FDL = new FourDirectionLayout(getActivity());
-
-        /**Card를 올릴 테이블? 정도로 생각하면 된다*/
-        /**Card를 올릴 FrameLayout을 Inflation 합니다.*/
         FrameLayout foruDirectrionFrame = (FrameLayout) root.findViewById(R.id.foruDirectrionFrame);
 
-        /**Container ForuDirectionFrame 안에 FourDirectionLayout객체를 집어넣는다. */
         foruDirectrionFrame.addView(FDL);
         return root;
     }
 
-    /***/
+
     public class FourDirectionLayout extends ViewGroup {
-        private final String[] TEXTS = {
+     /**   private final String[] TEXTS = {
                 "left",
                 "right",
                 "top",
@@ -68,12 +67,12 @@ public class ForuDirection_Fragment extends Fragment {
                 "바닥",
                 "보다",
 
-        };
+        };*/
 
         private final int[] COLORS = {
                 0xaa0000ff, 0xaa0000ff, 0xaaff0000, 0xaaff0000, 0xaa00ff00
         };
-        private final int PACKED_VERTICAL = TEXTS.length;
+        private final int PACKED_VERTICAL = cardArray.size();
         String TAG = "FourDirectionLayout";
         private GestureDetector.OnGestureListener mListener = new GestureDetector.SimpleOnGestureListener() {
             public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
@@ -106,8 +105,6 @@ public class ForuDirection_Fragment extends Fragment {
                         sy != 0 && (Math.abs(velocityX) > Math.abs(velocityY))
 
                         이건 vertical 뷰페이져에서 horizental작동하지 못하도록 하는 수식임
-
-
                         이해가 되지 않을 경우 저 수식을 하나씩 지워보는것도 좋음
                         */
                     }
@@ -148,14 +145,16 @@ public class ForuDirection_Fragment extends Fragment {
 
         public FourDirectionLayout(Context context) {
             super(context);
-            for (int i = 0; i < TEXTS.length; i++) {
+            for (int i = 0; i < cardArray.size(); i++) {
 
                 TextView tv = new TextView(context);
                 tv.setTag(i * 2);
                 tv.setTextSize(32);
                 tv.setTypeface(Typeface.DEFAULT_BOLD);
                 tv.setTextColor(0xffeeeeee);
-                tv.setText(TEXTS[i]);
+                WordCard wCard = cardArray.get(i);
+                String Words = wCard.getWords();
+                tv.setText(Words);
                 tv.setBackgroundColor(COLORS[i]);
                 addView(tv);
 
@@ -164,10 +163,10 @@ public class ForuDirection_Fragment extends Fragment {
                 tv2.setTextSize(32);
                 tv2.setTypeface(Typeface.DEFAULT_BOLD);
                 tv2.setTextColor(0xffeeeeee);
-                tv2.setText(TEXTS_2[i]);
+                String Interp = wCard.getInterpretation();
+                tv2.setText(Interp);
                 tv2.setBackgroundColor(COLORS[i]);
                 addView(tv2);
-
             }
 
             mDetector = new GestureDetector(context, mListener);
