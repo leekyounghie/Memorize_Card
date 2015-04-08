@@ -1,38 +1,26 @@
 package com.starnamu.projcet.memorize_card;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.Intent;
+import android.content.*;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.AttributeSet;
-import android.util.SparseArray;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.WindowManager;
-import android.widget.ExpandableListView;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
+import android.util.*;
+import android.view.*;
+import android.widget.*;
 
-import com.starnamu.projcet.memorize_card.awakeprocess.AwakeReceiver;
-import com.starnamu.projcet.memorize_card.awakeprocess.AwakeService;
-import com.starnamu.projcet.memorize_card.expandable.Group;
-import com.starnamu.projcet.memorize_card.expandable.MyExpandableListAdapter;
+import com.starnamu.projcet.memorize_card.awakeprocess.*;
+import com.starnamu.projcet.memorize_card.expandable.*;
+import com.starnamu.projcet.memorize_card.titletoolbar.SideMenu;
+import com.starnamu.projcet.memorize_card.titletoolbar.ToolbarTitle;
+//import com.starnamu.projcet.memorize_card.main_fragment_folder_1.ForuDirection_Fragment;
 
 public class MainActivity extends ActionBarActivity {
-    /*
-    * 명식 충돌 1100
-    * 식 충돌 1100
-    * 식 충돌 1100
-    * 식 충돌 1100
-    * 식 충돌 1100
-    *
-    * */
     Toolbar toolbar;
     /**
      * 좌측 숨겨진 메뉴와 메인화면을 담는 Layoiut
@@ -54,6 +42,7 @@ public class MainActivity extends ActionBarActivity {
     LinearLayout drawer;
     ExpandableListView listView;
 
+
     SparseArray<Group> groups = new SparseArray<Group>();
 
     @Override
@@ -61,15 +50,24 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
-        setSupportActionBar(toolbar);
-        dlDrawer.setDrawerListener(dtToggle);
-        //coustomFragmentManager();//4방향 ViewGroup
-        viewPagerManager();
+
+//        coustomFragmentManager();//4방향 ViewGroup
+//        viewPagerManager();
         showCustomTitleAndSubtitle();
 
         Intent boradcastIntent = new Intent(AwakeReceiver.ACTION_START);
         sendBroadcast(boradcastIntent);
 
+    }
+
+    private void showCustomTitleAndSubtitle() {
+        /**ToolBar를 Coustomizing하게 사용하기 위해 CoustomView정의*/
+        getSupportActionBar().setCustomView(new ToolbarTitle(this));
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+
+        /**ToolBar의 Title을 없애기 위한 코드*/
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setTitle(null);
     }
 
     @Override
@@ -78,75 +76,34 @@ public class MainActivity extends ActionBarActivity {
         AwakeService.awakenStop(this);
     }
 
-    private void showCustomTitleAndSubtitle() {
-        getSupportActionBar().setCustomView(R.layout.toolbarstat);
-        getSupportActionBar().setTitle("Custom Title");
-        getSupportActionBar().setSubtitle("subtitle");
-        getSupportActionBar().setCustomView(new ToolbarTitle(this));
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
-        getSupportActionBar().setDisplayShowCustomEnabled(true);
-    }
+   /* public void coustomFragmentManager() {
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction tr = fm.beginTransaction();
+        ForuDirection_Fragment fFragment = new ForuDirection_Fragment();
+        tr.add(R.id.main_viewpager, fFragment);
+        tr.commit();
+    }*/
 
-    class ToolbarTitle extends LinearLayout {
-
-        Context mContext;
-
-        public ToolbarTitle(Context context) {
-            super(context);
-            mContext = context;
-        }
-
-        public ToolbarTitle(Context context, AttributeSet attrs) {
-            super(context, attrs);
-            mContext = context;
-        }
-    }
-
-    /*
-
-        public void coustomFragmentManager() {
-            FragmentManager fm = getFragmentManager();
-            FragmentTransaction tr = fm.beginTransaction();
-            ForuDirection_Fragment fFragment = new ForuDirection_Fragment();
-            tr.add(R.id.container, fFragment);
-            tr.commit();
-        }
-    */
-    public void viewPagerManager() {
+    /*public void viewPagerManager() {
         PagerAdapter pagerAdapter = new com.starnamu.projcet.memorize_card.main_fragment_folder.PagerAdapter(getSupportFragmentManager());
         ViewPager mViewPager = (ViewPager) findViewById(R.id.main_viewpager);
         mViewPager.setAdapter(pagerAdapter);
-
-
-    }
+    }*/
 
     public void init() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        dlDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        dtToggle = new ActionBarDrawerToggle(this, dlDrawer, R.string.app_name, R.string.app_name);
-        drawer = (LinearLayout) findViewById(R.id.drawer);
+        titleBar();//TitleBar 구현 Method 호출
+        removeStatusBar(true);
+//        drawer = (LinearLayout) findViewById(R.id.drawer);
+//        drawer.addView(new SideMenu(this));
+        sideMenu();
+    }
 
-        createData();
+    public void sideMenu() {
 
-        listView = (ExpandableListView) findViewById(R.id.listView);
+        ExpandableListView listView = (ExpandableListView) findViewById(R.id.listView);
         MyExpandableListAdapter adapter = new MyExpandableListAdapter(this, listView, groups);
         listView.setAdapter(adapter);
-        removeStatusBar(true);
-    }
 
-    public void removeStatusBar(boolean remove) {
-        if (remove) {
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        } else {
-            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        }
-    }
-
-    /**
-     * 각항목에 값을 넣기위한 방법으로 지우지말고 시용
-     */
-    public void createData() {
         Group group = new Group("설정" + 1);
         for (int i = 1; i < 30; i++) {
             group.children.add(i + " 장 선택");
@@ -161,10 +118,21 @@ public class MainActivity extends ActionBarActivity {
         groups.append(1, group1);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    public void titleBar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        dlDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        dtToggle = new ActionBarDrawerToggle(this, dlDrawer, 0, 0);
+        setSupportActionBar(toolbar);
+        dlDrawer.setDrawerListener(dtToggle);
+    }
+
+    public void removeStatusBar(boolean remove) {
+        if (remove) {
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        } else {
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        }
     }
 
     @Override
@@ -179,6 +147,7 @@ public class MainActivity extends ActionBarActivity {
         super.onConfigurationChanged(newConfig);
         dtToggle.onConfigurationChanged(newConfig);
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
