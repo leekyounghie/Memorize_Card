@@ -26,7 +26,8 @@ public class PageFragment extends Fragment {
     WordCard wordCard;
     Animation animation;
     TextView viewPager_tranlate;
-
+    TextView viewPager_level;
+    TextView viewPager_word;
     public PageFragment(WordCard wordCard) {
 
         this.wordCard = wordCard;
@@ -36,8 +37,8 @@ public class PageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.viewpager_pagefragment, container, false);
-        TextView viewPager_word = (TextView) view.findViewById(R.id.main_viewpager_word);
-        TextView viewPager_level = (TextView) view.findViewById(R.id.main_viewpager_level);
+        viewPager_word = (TextView) view.findViewById(R.id.main_viewpager_word);
+        viewPager_level = (TextView) view.findViewById(R.id.main_viewpager_level);
         viewPager_tranlate = (TextView) view.findViewById(R.id.main_viewpager_translate);
         viewPager_tranlate.setVisibility(View.INVISIBLE);
         animation = AnimationUtils.loadAnimation(getActivity(), R.anim.flow);
@@ -55,6 +56,7 @@ public class PageFragment extends Fragment {
         });
         viewPager_word.setText(wordCard.getWord());
         viewPager_level.setText("Level : " + wordCard.getLevel());
+        viewPager_tranlate.setText(wordCard.getTranslate());
         return view;
 
     }

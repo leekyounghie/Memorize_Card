@@ -53,6 +53,7 @@ public class Fragment_ViewPager extends Fragment {
                 WordCard wordCard = new WordCard();
                 wordCard.setWord(Vocabulary.Word[i]);
                 wordCard.setLevel(1);
+                wordCard.setTranslate(Vocabulary.Translate[i]);
                 wordCardArrayList.add(wordCard);
             }
 
