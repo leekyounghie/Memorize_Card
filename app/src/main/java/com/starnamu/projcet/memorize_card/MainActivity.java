@@ -2,23 +2,27 @@ package com.starnamu.projcet.memorize_card;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Context;
-import android.content.*;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.*;
-import android.view.*;
-import android.widget.*;
+import android.util.SparseArray;
+import android.view.MenuItem;
+import android.view.WindowManager;
+import android.widget.ExpandableListView;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
-import com.starnamu.projcet.memorize_card.awakeprocess.*;
-import com.starnamu.projcet.memorize_card.expandable.*;
-import com.starnamu.projcet.memorize_card.titletoolbar.SideMenu;
+import com.starnamu.projcet.memorize_card.awakeprocess.AwakeReceiver;
+import com.starnamu.projcet.memorize_card.awakeprocess.AwakeService;
+import com.starnamu.projcet.memorize_card.expandable.Group;
+import com.starnamu.projcet.memorize_card.expandable.MyExpandableListAdapter;
+import com.starnamu.projcet.memorize_card.main_fragment_folder.Fragment_ViewPager;
 import com.starnamu.projcet.memorize_card.titletoolbar.ToolbarTitle;
-//import com.starnamu.projcet.memorize_card.main_fragment_folder_1.ForuDirection_Fragment;
+
 
 public class MainActivity extends ActionBarActivity {
     Toolbar toolbar;
@@ -51,7 +55,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         init();
 
-//        coustomFragmentManager();//4방향 ViewGroup
+        coustomFragmentManager();//4방향 ViewGroup
 //        viewPagerManager();
         showCustomTitleAndSubtitle();
 
@@ -76,13 +80,14 @@ public class MainActivity extends ActionBarActivity {
         AwakeService.awakenStop(this);
     }
 
-   /* public void coustomFragmentManager() {
+    public void coustomFragmentManager() {
         FragmentManager fm = getFragmentManager();
         FragmentTransaction tr = fm.beginTransaction();
-        ForuDirection_Fragment fFragment = new ForuDirection_Fragment();
-        tr.add(R.id.main_viewpager, fFragment);
+        Fragment_ViewPager fFragment = new Fragment_ViewPager(getSupportFragmentManager());//MainActivity에서 수정된것은 이거 하나 입니다.
+        //ForuDirection_Fragment fFragment = new ForuDirection_Fragment();
+        tr.add(R.id.container, fFragment);
         tr.commit();
-    }*/
+    }
 
     /*public void viewPagerManager() {
         PagerAdapter pagerAdapter = new com.starnamu.projcet.memorize_card.main_fragment_folder.PagerAdapter(getSupportFragmentManager());

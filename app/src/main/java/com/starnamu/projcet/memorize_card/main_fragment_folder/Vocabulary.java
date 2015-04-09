@@ -5,7 +5,7 @@ package com.starnamu.projcet.memorize_card.main_fragment_folder;
  */
 public class Vocabulary {
 
-    static String[] Word={"use", "between", "word","rain","main","activity"};
+    static String[] Word={"Use", "Between", "Word","Rain","Main","Activity"};
 
 
 

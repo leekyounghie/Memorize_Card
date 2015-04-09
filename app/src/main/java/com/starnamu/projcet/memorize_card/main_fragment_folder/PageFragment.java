@@ -14,6 +14,10 @@ import com.starnamu.projcet.memorize_card.R;
 /**
  * Created by youmyeongsic on 15. 4. 5..
  */
+
+/*
+* 뷰페이져 안에 있는 Fragment입니다.  support.v4.frament입니다.
+* */
 public class PageFragment extends Fragment {
 
     WordCard wordCard;
@@ -30,7 +34,7 @@ public class PageFragment extends Fragment {
         TextView viewPager_word = (TextView) view.findViewById(R.id.main_viewpager_word);
         TextView viewPager_level = (TextView) view.findViewById(R.id.main_viewpager_level);
         viewPager_word.setText(wordCard.getWord());
-        viewPager_level.setText("Level : "+wordCard.getLevel());
+        viewPager_level.setText("Level : " + wordCard.getLevel());
         return view;
 
     }
