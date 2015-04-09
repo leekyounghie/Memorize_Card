@@ -6,6 +6,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.starnamu.projcet.memorize_card.R;
@@ -21,6 +24,8 @@ import com.starnamu.projcet.memorize_card.R;
 public class PageFragment extends Fragment {
 
     WordCard wordCard;
+    Animation animation;
+    TextView viewPager_tranlate;
 
     public PageFragment(WordCard wordCard) {
 
@@ -33,9 +38,42 @@ public class PageFragment extends Fragment {
         View view = inflater.inflate(R.layout.viewpager_pagefragment, container, false);
         TextView viewPager_word = (TextView) view.findViewById(R.id.main_viewpager_word);
         TextView viewPager_level = (TextView) view.findViewById(R.id.main_viewpager_level);
+        viewPager_tranlate = (TextView) view.findViewById(R.id.main_viewpager_translate);
+        viewPager_tranlate.setVisibility(View.INVISIBLE);
+        animation = AnimationUtils.loadAnimation(getActivity(), R.anim.flow);
+        animation.setAnimationListener(new FlowAnimationListener());
+        Button tranlate_button = (Button) view.findViewById(R.id.translate_button);
+
+        tranlate_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewPager_tranlate.setVisibility(View.VISIBLE);
+                viewPager_tranlate.startAnimation(animation);
+
+
+            }
+        });
         viewPager_word.setText(wordCard.getWord());
         viewPager_level.setText("Level : " + wordCard.getLevel());
         return view;
 
+    }
+
+    private class FlowAnimationListener implements Animation.AnimationListener {
+
+        @Override
+        public void onAnimationStart(Animation animation) {
+
+        }
+
+        @Override
+        public void onAnimationEnd(Animation animation) {
+
+        }
+
+        @Override
+        public void onAnimationRepeat(Animation animation) {
+
+        }
     }
 }
