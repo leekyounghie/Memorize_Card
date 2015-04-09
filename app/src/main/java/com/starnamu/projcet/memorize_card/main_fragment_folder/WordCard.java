@@ -1,4 +1,4 @@
-package com.starnamu.projcet.memorize_card.directional_viewpager;
+package com.starnamu.projcet.memorize_card.main_fragment_folder;
 
 import java.lang.String; /**
  * Created by youmyeongsic on 15. 4. 6..
