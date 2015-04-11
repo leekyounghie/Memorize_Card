@@ -81,17 +81,14 @@ public class MainActivity extends ActionBarActivity {
 
 
     public void coustomFragmentManager() {
-        /*FragmentManager fm = getFragmentManager();
-        FragmentTransaction tr = fm.beginTransaction();
-        Fragment_ViewPager fFragment = new Fragment_ViewPager(getSupportFragmentManager());//MainActivity에서 수정된것은 이거 하나 입니다.
-        //ForuDirection_Fragment fFragment = new ForuDirection_Fragment();
-        tr.add(R.id.container, fFragment);
-        tr.commit();*/
 
+
+
+        /* 컨테이너에서 뷰페이져 선언후 바로 addview해줬습니다.*/
         FrameLayout frameLayout = (FrameLayout) findViewById(R.id.container);
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         ViewPager viewPager = new ViewPager(this);
-        viewPager.setId(R.id.mViewPager);
+        viewPager.setId(R.id.mViewPager); //xml이 존재하지 않아 바로 아이디 지정해주는 메소드입니다. values/ids.xml에 아이디 추가 됬습ㄴ디ㅏ.
         viewPager.setAdapter(viewPagerAdapter);
         frameLayout.addView(viewPager);
     }
