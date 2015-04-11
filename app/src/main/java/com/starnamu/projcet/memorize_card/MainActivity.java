@@ -1,10 +1,9 @@
 package com.starnamu.projcet.memorize_card;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -20,7 +19,7 @@ import com.starnamu.projcet.memorize_card.awakeprocess.AwakeReceiver;
 import com.starnamu.projcet.memorize_card.awakeprocess.AwakeService;
 import com.starnamu.projcet.memorize_card.expandable.Group;
 import com.starnamu.projcet.memorize_card.expandable.MyExpandableListAdapter;
-import com.starnamu.projcet.memorize_card.main_fragment_folder.Fragment_ViewPager;
+import com.starnamu.projcet.memorize_card.main_fragment_folder.ViewPagerAdapter;
 import com.starnamu.projcet.memorize_card.titletoolbar.ToolbarTitle;
 
 
@@ -80,13 +79,21 @@ public class MainActivity extends ActionBarActivity {
         AwakeService.awakenStop(this);
     }
 
+
     public void coustomFragmentManager() {
-        FragmentManager fm = getFragmentManager();
+        /*FragmentManager fm = getFragmentManager();
         FragmentTransaction tr = fm.beginTransaction();
         Fragment_ViewPager fFragment = new Fragment_ViewPager(getSupportFragmentManager());//MainActivity에서 수정된것은 이거 하나 입니다.
         //ForuDirection_Fragment fFragment = new ForuDirection_Fragment();
         tr.add(R.id.container, fFragment);
-        tr.commit();
+        tr.commit();*/
+
+        FrameLayout frameLayout = (FrameLayout) findViewById(R.id.container);
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        ViewPager viewPager = new ViewPager(this);
+        viewPager.setId(R.id.mViewPager);
+        viewPager.setAdapter(viewPagerAdapter);
+        frameLayout.addView(viewPager);
     }
 
     /*public void viewPagerManager() {
