@@ -93,15 +93,11 @@ public class MainActivity extends ActionBarActivity {
         frameLayout.addView(viewPager);
     }
 
-    /*public void viewPagerManager() {
-        PagerAdapter pagerAdapter = new com.starnamu.projcet.memorize_card.main_fragment_folder.PagerAdapter(getSupportFragmentManager());
-        ViewPager mViewPager = (ViewPager) findViewById(R.id.main_viewpager);
-        mViewPager.setAdapter(pagerAdapter);
-    }*/
 
     public void init() {
         titleBar();//TitleBar 구현 Method 호출
         removeStatusBar(true);
+        //SideMenu 구현중
 //        drawer = (LinearLayout) findViewById(R.id.drawer);
 //        drawer.addView(new SideMenu(this));
         sideMenu();
