@@ -28,6 +28,7 @@ public class PageFragment extends Fragment {
     TextView viewPager_tranlate;
     TextView viewPager_level;
     TextView viewPager_word;
+
     public PageFragment(WordCard wordCard) {
 
         this.wordCard = wordCard;

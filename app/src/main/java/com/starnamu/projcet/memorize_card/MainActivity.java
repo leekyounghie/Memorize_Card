@@ -21,15 +21,19 @@ import com.starnamu.projcet.memorize_card.fragment_folder.StudyFragment;
 import com.starnamu.projcet.memorize_card.fragment_folder.SideFragment;
 import com.starnamu.projcet.memorize_card.titletoolbar.ToolbarTitle;
 
-public class MainActivity extends ActionBarActivity implements SideFragment.choiceFragmentListener {
+public class MainActivity extends ActionBarActivity implements SideFragment.choiceFragmentListener,
+        SettingFragment.ActivityFragmentProtocol {
 
     final String TAG = "MainActivity";
     int mCurrentFragmentIndex;
     public final static int STUDYFRAGMENT = 0;
     public final static int SETTINGFRAGMENT = 1;
     public final static int STATISTICSTHREEFRAGMENT = 2;
+    /*settingFragment에서 넘어오는 값으로 변경해야함*/
+    int mToDayWordCounter;
 
     Toolbar toolbar;
+    Bundle CardCount = null;
     /*
      * 좌측 숨겨진 메뉴와 메인화면을 담는 Layoiut
      * toolbar instanc에 toolbar의 속성을 정의하면 된다.
@@ -60,6 +64,9 @@ public class MainActivity extends ActionBarActivity implements SideFragment.choi
     public void init() {
         titleBar();//TitleBar 구현 Method 호출
         removeStatusBar(true);
+        CardCount = new Bundle();
+        CardCount.putInt("cordConunt", mToDayWordCounter);
+
     }
 
     /*TitleBar 설정 method*/
@@ -128,6 +135,12 @@ public class MainActivity extends ActionBarActivity implements SideFragment.choi
                 break;
         }
         return newFragment;
+    }
+
+    @Override
+    public void activityAsInFragment(int i) {
+        StudyFragment Stfragment = new StudyFragment();
+        Stfragment.mToDayWordCounter = i;
     }
 
 

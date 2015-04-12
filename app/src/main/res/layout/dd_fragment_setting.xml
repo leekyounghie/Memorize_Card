@@ -4,10 +4,10 @@
     android:layout_height="match_parent"
     tools:context="com.starnamu.projcet.memorize_card.fragment_folder.SettingFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <SeekBar
+        android:id="@+id/seekbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:max="30" />
 
 </FrameLayout>

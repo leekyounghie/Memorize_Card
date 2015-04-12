@@ -14,10 +14,12 @@ import com.starnamu.projcet.memorize_card.main_fragment_folder.ViewPagerAdapter;
 
 public class StudyFragment extends Fragment {
 
-    View view;
+    private View view;
+
+
+    public static int mToDayWordCounter;
 
     public StudyFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -27,14 +29,17 @@ public class StudyFragment extends Fragment {
         view = inflater.inflate(R.layout.dd_fragment_study, container, false);
         coustomFragmentManager();
         return view;
-
     }
 
     public void coustomFragmentManager() {
         /* 컨테이너에서 뷰페이져 선언후 바로 addview해줬습니다.*/
         FrameLayout frameLayout = (FrameLayout) view.findViewById(R.id.dd_fragment_one_container);
+        ViewPagerAdapter.ToDayWordCounter = mToDayWordCounter;
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getFragmentManager());
+
+        /*setToDayWordCounter()안에 보여줄 카드 갯수 정의*/
         ViewPager viewPager = new ViewPager(getActivity());
+
         viewPager.setId(R.id.mViewPager); //xml이 존재하지 않아 바로 아이디 지정해주는 메소드입니다. values/ids.xml에 아이디 추가 됬습ㄴ디ㅏ.
         viewPager.setAdapter(viewPagerAdapter);
         frameLayout.addView(viewPager);

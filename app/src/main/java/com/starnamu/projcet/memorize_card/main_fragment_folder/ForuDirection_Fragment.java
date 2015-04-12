@@ -28,8 +28,8 @@ import java.util.ArrayList;
 public class ForuDirection_Fragment extends Fragment {
     */
 /**
-     * 카드를 담을수 있는 ArrayList 입니다.
-     *//*
+ * 카드를 담을수 있는 ArrayList 입니다.
+ *//*
 
     ArrayList<View> arrayList = new ArrayList<View>();
 
