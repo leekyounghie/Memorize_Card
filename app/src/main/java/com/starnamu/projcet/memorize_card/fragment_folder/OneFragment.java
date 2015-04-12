@@ -21,14 +21,11 @@ public class OneFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        coustomFragmentManager();
-    }
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.dd_fragment_one, container, false);
+        coustomFragmentManager();
         return view;
 
     }
