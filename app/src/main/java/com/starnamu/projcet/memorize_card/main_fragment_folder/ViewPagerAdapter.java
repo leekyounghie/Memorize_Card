@@ -23,15 +23,11 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
             wordCard.setTranslate(Vocabulary.Translate[i]);
             wordCardArrayList.add(wordCard);
         }
-
-
     }
-
 
     @Override
     public android.support.v4.app.Fragment getItem(int position) {
         PageFragment pageFragment = new PageFragment(wordCardArrayList.get(position));
-
 
         return pageFragment;
     }

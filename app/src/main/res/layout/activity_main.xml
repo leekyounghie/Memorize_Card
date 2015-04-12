@@ -17,10 +17,15 @@
         tools:context=".MainActivity">
 
         <FrameLayout
-            android:id="@+id/container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-             />
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </FrameLayout>
 
         <LinearLayout
             android:id="@+id/drawer"
@@ -30,16 +35,13 @@
             android:background="#3F51B5"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/sidelayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+            <fragment
+                android:name="com.starnamu.projcet.memorize_card.fragment_folder.SideFragment"
+                android:id="@+id/sideFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:layout="@layout/dc_sidefragment" />
 
-                <ExpandableListView
-                    android:id="@+id/listView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
         </LinearLayout>
     </android.support.v4.widget.DrawerLayout>
 </LinearLayout>
