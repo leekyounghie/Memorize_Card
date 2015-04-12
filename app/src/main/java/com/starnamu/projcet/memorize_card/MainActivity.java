@@ -5,43 +5,38 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.starnamu.projcet.memorize_card.awakeprocess.AwakeReceiver;
 import com.starnamu.projcet.memorize_card.awakeprocess.AwakeService;
-import com.starnamu.projcet.memorize_card.fragment_folder.OneFragment;
+import com.starnamu.projcet.memorize_card.fragment_folder.SettingFragment;
+import com.starnamu.projcet.memorize_card.fragment_folder.StatisticsFragment;
+import com.starnamu.projcet.memorize_card.fragment_folder.StudyFragment;
 import com.starnamu.projcet.memorize_card.fragment_folder.SideFragment;
-import com.starnamu.projcet.memorize_card.fragment_folder.ThreeFragment;
-import com.starnamu.projcet.memorize_card.fragment_folder.TwoFragment;
-import com.starnamu.projcet.memorize_card.main_fragment_folder.ViewPagerAdapter;
 import com.starnamu.projcet.memorize_card.titletoolbar.ToolbarTitle;
-
 
 public class MainActivity extends ActionBarActivity implements SideFragment.choiceFragmentListener {
 
     final String TAG = "MainActivity";
     int mCurrentFragmentIndex;
-    public final static int ONEFRAGMENT = 0;
-    public final static int TWOFRAGMENT = 1;
-    public final static int THREEFRAGMENT = 2;
-
+    public final static int STUDYFRAGMENT = 0;
+    public final static int SETTINGFRAGMENT = 1;
+    public final static int STATISTICSTHREEFRAGMENT = 2;
 
     Toolbar toolbar;
-    /**
+    /*
      * 좌측 숨겨진 메뉴와 메인화면을 담는 Layoiut
      * toolbar instanc에 toolbar의 속성을 정의하면 된다.
      * setTitle, setVisibility()등의 속성을 정의할수 있다.
      */
     DrawerLayout dlDrawer;
-    /**
+    /*
      * dtToggle은 상단 좌측의 그래픽 Animation
      */
     ActionBarDrawerToggle dtToggle;
@@ -52,21 +47,8 @@ public class MainActivity extends ActionBarActivity implements SideFragment.choi
         setContentView(R.layout.activity_main);
         init();
 
-//        coustomFragmentManager();
-        showCustomTitleAndSubtitle();
-
         Intent boradcastIntent = new Intent(AwakeReceiver.ACTION_START);
         sendBroadcast(boradcastIntent);
-
-    }
-
-    private void showCustomTitleAndSubtitle() {
-        /**ToolBar를 Coustomizing하게 사용하기 위해 CoustomView정의*/
-        getSupportActionBar().setCustomView(new ToolbarTitle(this));
-        getSupportActionBar().setDisplayShowCustomEnabled(true);
-
-        /**ToolBar의 Title을 없애기 위한 코드*/
-
     }
 
     @Override
@@ -75,22 +57,12 @@ public class MainActivity extends ActionBarActivity implements SideFragment.choi
         AwakeService.awakenStop(this);
     }
 
-
-//    public void coustomFragmentManager() {
-//        /* 컨테이너에서 뷰페이져 선언후 바로 addview해줬습니다.*/
-//        FrameLayout frameLayout = (FrameLayout) findViewById(R.id.container);
-//        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-//        ViewPager viewPager = new ViewPager(this);
-//        viewPager.setId(R.id.mViewPager); //xml이 존재하지 않아 바로 아이디 지정해주는 메소드입니다. values/ids.xml에 아이디 추가 됬습ㄴ디ㅏ.
-//        viewPager.setAdapter(viewPagerAdapter);
-//        frameLayout.addView(viewPager);
-//    }
-
     public void init() {
         titleBar();//TitleBar 구현 Method 호출
         removeStatusBar(true);
     }
 
+    /*TitleBar 설정 method*/
     public void titleBar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setTitle(null);
@@ -98,6 +70,8 @@ public class MainActivity extends ActionBarActivity implements SideFragment.choi
         dtToggle = new ActionBarDrawerToggle(this, dlDrawer, 0, 0);
         setSupportActionBar(toolbar);
         dlDrawer.setDrawerListener(dtToggle);
+        getSupportActionBar().setCustomView(new ToolbarTitle(this));
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
     }
 
     @Override
@@ -105,32 +79,32 @@ public class MainActivity extends ActionBarActivity implements SideFragment.choi
 
         switch (id) {
             case R.id.Study:
-                mCurrentFragmentIndex = ONEFRAGMENT;
+                mCurrentFragmentIndex = STUDYFRAGMENT;
                 fragmentReplace(mCurrentFragmentIndex);
                 Toast.makeText(this, "첫번째 프래그 먼트 크릭", Toast.LENGTH_LONG).show();
                 break;
 
             case R.id.Setting:
-                mCurrentFragmentIndex = TWOFRAGMENT;
+                mCurrentFragmentIndex = SETTINGFRAGMENT;
                 fragmentReplace(mCurrentFragmentIndex);
+                Toast.makeText(this, "두번째 프래그 먼트 크릭", Toast.LENGTH_LONG).show();
                 break;
 
             case R.id.Statistics:
-                mCurrentFragmentIndex = THREEFRAGMENT;
+                mCurrentFragmentIndex = STATISTICSTHREEFRAGMENT;
                 fragmentReplace(mCurrentFragmentIndex);
+                Toast.makeText(this, "세번째 프래그 먼트 크릭", Toast.LENGTH_LONG).show();
                 break;
 
             default:
-                mCurrentFragmentIndex = ONEFRAGMENT;
+                mCurrentFragmentIndex = STUDYFRAGMENT;
                 fragmentReplace(mCurrentFragmentIndex);
         }
     }
 
     public void fragmentReplace(int mFragmentIndex) {
         Fragment newFragment;
-
         newFragment = getFragment(mFragmentIndex);
-
         FragmentTransaction transaction = getSupportFragmentManager()
                 .beginTransaction();
         transaction.replace(R.id.container, newFragment);
@@ -141,14 +115,14 @@ public class MainActivity extends ActionBarActivity implements SideFragment.choi
 
         Fragment newFragment = null;
         switch (idx) {
-            case ONEFRAGMENT:
-                newFragment = new OneFragment();
+            case STUDYFRAGMENT:
+                newFragment = new StudyFragment();
                 break;
-            case TWOFRAGMENT:
-                newFragment = new TwoFragment();
+            case SETTINGFRAGMENT:
+                newFragment = new SettingFragment();
                 break;
-            case THREEFRAGMENT:
-                newFragment = new ThreeFragment();
+            case STATISTICSTHREEFRAGMENT:
+                newFragment = new StatisticsFragment();
                 break;
             default:
                 break;
@@ -182,7 +156,6 @@ public class MainActivity extends ActionBarActivity implements SideFragment.choi
         dtToggle.onConfigurationChanged(newConfig);
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (dtToggle.onOptionsItemSelected(item)) {
@@ -190,6 +163,4 @@ public class MainActivity extends ActionBarActivity implements SideFragment.choi
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 }

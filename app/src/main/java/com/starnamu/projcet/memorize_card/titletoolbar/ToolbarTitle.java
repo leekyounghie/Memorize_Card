@@ -33,7 +33,6 @@ public class ToolbarTitle extends LinearLayout {
         init();
     }
 
-
     public void init() {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,

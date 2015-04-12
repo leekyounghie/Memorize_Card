@@ -12,11 +12,11 @@ import android.widget.FrameLayout;
 import com.starnamu.projcet.memorize_card.R;
 import com.starnamu.projcet.memorize_card.main_fragment_folder.ViewPagerAdapter;
 
-public class OneFragment extends Fragment {
+public class StudyFragment extends Fragment {
 
     View view;
 
-    public OneFragment() {
+    public StudyFragment() {
         // Required empty public constructor
     }
 
@@ -24,7 +24,7 @@ public class OneFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.dd_fragment_one, container, false);
+        view = inflater.inflate(R.layout.dd_fragment_study, container, false);
         coustomFragmentManager();
         return view;
 
