@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +31,11 @@ public class SettingFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        try {
+            saveSetting = new AutoSaveSetting("/mnt/sdcard/texxxxxxxxt.txt");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -40,11 +44,20 @@ public class SettingFragment extends Fragment {
         callProgressbar();
     }
 
+    private void saveDefaultsSeekBar() {
+        saveSetting.Ready();
+        DefaultsSeekBar = saveSetting.ReadInt("StNum", DefaultsSeekBar);
+        ToDayWordCounter = DefaultsSeekBar;
+        settingPortocol.setSettingPortocol(ToDayWordCounter);
+        saveSetting.EndReady();
+    }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         seekbar = (SeekBar) getActivity().findViewById(R.id.seekbar);
         choicecount = (EditText) getActivity().findViewById(R.id.choicecount);
+        saveDefaultsSeekBar();
         seekbar.setProgress(DefaultsSeekBar);
         choicecount.setText(Integer.toString(DefaultsSeekBar));
     }
@@ -53,17 +66,16 @@ public class SettingFragment extends Fragment {
         ToDayWordCounter = progress;
         String str = Integer.toString(progress);
         choicecount.setText(str);
+
+        /******************************************/
         settingPortocol.setSettingPortocol(ToDayWordCounter);
+
         setLodeSetting();
         setSaveSetting();
     }
 
     private void setLodeSetting() {
-        try {
-            saveSetting = new AutoSaveSetting("/mnt/sdcard/texxxxxxxxt.txt");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
         saveSetting.Ready();
         String name = saveSetting.ReadString("name", "이름없음");
         int StNum = saveSetting.ReadInt("StNum", 20011125);
@@ -108,6 +120,5 @@ public class SettingFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         settingPortocol = (SettingPortocol) activity;
-
     }
 }

@@ -8,15 +8,32 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+
 import com.starnamu.projcet.memorize_card.R;
+import com.starnamu.projcet.memorize_card.autosavesetting.AutoSaveSetting;
 import com.starnamu.projcet.memorize_card.main_fragment_folder.ViewPagerAdapter;
 
 public class StudyFragment extends Fragment {
 
     private View view;
-    public static int mToDayWordCounter;
+    public static int mToDayWordCounter = 0;
+    AutoSaveSetting saveSetting;
 
     public StudyFragment() {
+        setLodeSetting();
+    }
+
+    private void setLodeSetting() {
+        try {
+            saveSetting = new AutoSaveSetting("/mnt/sdcard/texxxxxxxxt.txt");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        saveSetting.Ready();
+        int StNum = saveSetting.ReadInt("StNum", mToDayWordCounter);
+        mToDayWordCounter = StNum;
+        saveSetting.EndReady();
     }
 
     @Override
