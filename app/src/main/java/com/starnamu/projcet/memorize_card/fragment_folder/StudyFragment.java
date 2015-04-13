@@ -8,15 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-
 import com.starnamu.projcet.memorize_card.R;
 import com.starnamu.projcet.memorize_card.main_fragment_folder.ViewPagerAdapter;
 
 public class StudyFragment extends Fragment {
 
     private View view;
-
-
     public static int mToDayWordCounter;
 
     public StudyFragment() {

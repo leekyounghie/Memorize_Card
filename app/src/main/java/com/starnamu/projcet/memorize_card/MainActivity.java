@@ -22,15 +22,14 @@ import com.starnamu.projcet.memorize_card.fragment_folder.SideFragment;
 import com.starnamu.projcet.memorize_card.titletoolbar.ToolbarTitle;
 
 public class MainActivity extends ActionBarActivity implements SideFragment.choiceFragmentListener,
-        SettingFragment.ActivityFragmentProtocol {
-
+        SettingFragment.SettingPortocol {
     final String TAG = "MainActivity";
     int mCurrentFragmentIndex;
     public final static int STUDYFRAGMENT = 0;
     public final static int SETTINGFRAGMENT = 1;
     public final static int STATISTICSTHREEFRAGMENT = 2;
     /*settingFragment에서 넘어오는 값으로 변경해야함*/
-    int mToDayWordCounter;
+    private int mToDayWordCounter;
 
     Toolbar toolbar;
     Bundle CardCount = null;
@@ -50,7 +49,6 @@ public class MainActivity extends ActionBarActivity implements SideFragment.choi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
-
         Intent boradcastIntent = new Intent(AwakeReceiver.ACTION_START);
         sendBroadcast(boradcastIntent);
     }
@@ -83,7 +81,6 @@ public class MainActivity extends ActionBarActivity implements SideFragment.choi
 
     @Override
     public void onClickChoice(int id) {
-
         switch (id) {
             case R.id.Study:
                 mCurrentFragmentIndex = STUDYFRAGMENT;
@@ -119,11 +116,11 @@ public class MainActivity extends ActionBarActivity implements SideFragment.choi
     }
 
     public Fragment getFragment(int idx) {
-
         Fragment newFragment = null;
         switch (idx) {
             case STUDYFRAGMENT:
                 newFragment = new StudyFragment();
+                StudyFragment.mToDayWordCounter = mToDayWordCounter;
                 break;
             case SETTINGFRAGMENT:
                 newFragment = new SettingFragment();
@@ -138,9 +135,8 @@ public class MainActivity extends ActionBarActivity implements SideFragment.choi
     }
 
     @Override
-    public void activityAsInFragment(int i) {
-        StudyFragment Stfragment = new StudyFragment();
-        Stfragment.mToDayWordCounter = i;
+    public void setSettingPortocol(int i) {
+        mToDayWordCounter = i;
     }
 
 
