@@ -1,8 +1,9 @@
 package com.starnamu.projcet.memorize_card.main_fragment_folder;
 
-import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+
+import com.starnamu.projcet.memorize_card.MainActivity;
 
 import java.util.ArrayList;
 
@@ -14,7 +15,6 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     private ArrayList<WordCard> wordCardArrayList = new ArrayList<WordCard>();
 
 
-    public static int ToDayWordCounter;
 
    /* public void setToDayWordCounter(int toDayWordCounter) {
         ToDayWordCounter = toDayWordCounter;
@@ -26,7 +26,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     }
 
     public void init() {
-        for (int i = 0; i < ToDayWordCounter; i++) {
+        for (int i = 0; i < MainActivity.mToDayWordCounter; i++) {
             WordCard wordCard = new WordCard();
             wordCard.setWord(Vocabulary.Word[i]);
             wordCard.setLevel(1);

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import com.starnamu.projcet.memorize_card.MainActivity;
 import com.starnamu.projcet.memorize_card.R;
 import com.starnamu.projcet.memorize_card.autosavesetting.AutoSaveSetting;
 import com.starnamu.projcet.memorize_card.main_fragment_folder.ViewPagerAdapter;
@@ -16,7 +17,7 @@ import com.starnamu.projcet.memorize_card.main_fragment_folder.ViewPagerAdapter;
 public class StudyFragment extends Fragment {
 
     private View view;
-    public static int mToDayWordCounter = 0;
+
     AutoSaveSetting saveSetting;
 
     public StudyFragment() {
@@ -31,8 +32,8 @@ public class StudyFragment extends Fragment {
         }
 
         saveSetting.Ready();
-        int StNum = saveSetting.ReadInt("StNum", mToDayWordCounter);
-        mToDayWordCounter = StNum;
+        int StNum = saveSetting.ReadInt("StNum", MainActivity.mToDayWordCounter);
+        MainActivity.mToDayWordCounter = StNum;
         saveSetting.EndReady();
     }
 
@@ -48,7 +49,7 @@ public class StudyFragment extends Fragment {
     public void coustomFragmentManager() {
         /* 컨테이너에서 뷰페이져 선언후 바로 addview해줬습니다.*/
         FrameLayout frameLayout = (FrameLayout) view.findViewById(R.id.dd_fragment_one_container);
-        ViewPagerAdapter.ToDayWordCounter = mToDayWordCounter;
+
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getFragmentManager());
 
         /*setToDayWordCounter()안에 보여줄 카드 갯수 정의*/

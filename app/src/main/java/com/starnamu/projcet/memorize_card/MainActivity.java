@@ -1,10 +1,10 @@
 package com.starnamu.projcet.memorize_card;
 
-import android.support.v4.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -17,9 +17,9 @@ import com.starnamu.projcet.memorize_card.awakeprocess.AwakeReceiver;
 import com.starnamu.projcet.memorize_card.awakeprocess.AwakeService;
 import com.starnamu.projcet.memorize_card.fragment_folder.DBControlFragment;
 import com.starnamu.projcet.memorize_card.fragment_folder.SettingFragment;
-import com.starnamu.projcet.memorize_card.fragment_folder.StatisticsFragment;
-import com.starnamu.projcet.memorize_card.fragment_folder.StudyFragment;
 import com.starnamu.projcet.memorize_card.fragment_folder.SideFragment;
+import com.starnamu.projcet.memorize_card.fragment_folder.StaticFragment;
+import com.starnamu.projcet.memorize_card.fragment_folder.StudyFragment;
 import com.starnamu.projcet.memorize_card.titletoolbar.ToolbarTitle;
 
 public class MainActivity extends ActionBarActivity implements SideFragment.choiceFragmentListener,
@@ -30,8 +30,9 @@ public class MainActivity extends ActionBarActivity implements SideFragment.choi
     public final static int SETTINGFRAGMENT = 1;
     public final static int STATISTICSTHREEFRAGMENT = 2;
     public final static int DATABASECONTROLFRAGMENT = 3;
+    public  static int mToDayWordCounter = 5;
     /*settingFragment에서 넘어오는 값으로 변경해야함*/
-    private int mToDayWordCounter;
+
 
     Toolbar toolbar;
     Bundle CardCount = null;
@@ -127,13 +128,13 @@ public class MainActivity extends ActionBarActivity implements SideFragment.choi
         switch (idx) {
             case STUDYFRAGMENT:
                 newFragment = new StudyFragment();
-                StudyFragment.mToDayWordCounter = mToDayWordCounter;
+
                 break;
             case SETTINGFRAGMENT:
                 newFragment = new SettingFragment();
                 break;
             case STATISTICSTHREEFRAGMENT:
-                newFragment = new StatisticsFragment();
+                newFragment = new StaticFragment();
                 break;
             case DATABASECONTROLFRAGMENT:
                 newFragment = new DBControlFragment();
