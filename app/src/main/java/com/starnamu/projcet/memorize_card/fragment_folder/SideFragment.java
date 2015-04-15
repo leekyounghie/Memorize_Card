@@ -14,7 +14,7 @@ import com.starnamu.projcet.memorize_card.R;
 public class SideFragment extends Fragment {
 
 
-    Button Study, Setting, Statistics;
+    Button Study, Setting, Statistics, DBControl;
     View view;
 
     @Nullable
@@ -42,6 +42,8 @@ public class SideFragment extends Fragment {
         Setting.setOnClickListener(onClickListener);
         Statistics = (Button) view.findViewById(R.id.Statistics);
         Statistics.setOnClickListener(onClickListener);
+        DBControl = (Button) view.findViewById(R.id.DBControl);
+        DBControl.setOnClickListener(onClickListener);
     }
 
     /**

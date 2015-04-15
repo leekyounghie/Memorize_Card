@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.starnamu.projcet.memorize_card.awakeprocess.AwakeReceiver;
 import com.starnamu.projcet.memorize_card.awakeprocess.AwakeService;
+import com.starnamu.projcet.memorize_card.fragment_folder.DBControlFragment;
 import com.starnamu.projcet.memorize_card.fragment_folder.SettingFragment;
 import com.starnamu.projcet.memorize_card.fragment_folder.StatisticsFragment;
 import com.starnamu.projcet.memorize_card.fragment_folder.StudyFragment;
@@ -28,6 +29,7 @@ public class MainActivity extends ActionBarActivity implements SideFragment.choi
     public final static int STUDYFRAGMENT = 0;
     public final static int SETTINGFRAGMENT = 1;
     public final static int STATISTICSTHREEFRAGMENT = 2;
+    public final static int DATABASECONTROLFRAGMENT = 3;
     /*settingFragment에서 넘어오는 값으로 변경해야함*/
     private int mToDayWordCounter;
 
@@ -99,6 +101,11 @@ public class MainActivity extends ActionBarActivity implements SideFragment.choi
                 fragmentReplace(mCurrentFragmentIndex);
                 Toast.makeText(this, "세번째 프래그 먼트 크릭", Toast.LENGTH_LONG).show();
                 break;
+            case R.id.DBControl:
+                mCurrentFragmentIndex = DATABASECONTROLFRAGMENT;
+                fragmentReplace(mCurrentFragmentIndex);
+                Toast.makeText(this, "네번째 프래그 먼트 크릭", Toast.LENGTH_LONG).show();
+                break;
 
             default:
                 mCurrentFragmentIndex = STUDYFRAGMENT;
@@ -127,6 +134,9 @@ public class MainActivity extends ActionBarActivity implements SideFragment.choi
                 break;
             case STATISTICSTHREEFRAGMENT:
                 newFragment = new StatisticsFragment();
+                break;
+            case DATABASECONTROLFRAGMENT:
+                newFragment = new DBControlFragment();
                 break;
             default:
                 break;

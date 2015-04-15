@@ -1,4 +1,4 @@
-package com.starnamu.projcet.memorize_card.graph_fragment_folder;
+package com.starnamu.projcet.memorize_card.fragment_folder;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -39,7 +39,7 @@ import lecho.lib.hellocharts.view.LineChartView;
 import lecho.lib.hellocharts.view.PieChartView;
 import lecho.lib.hellocharts.view.PreviewLineChartView;
 
-public class ViewPagerChartsActivity extends ActionBarActivity implements ActionBar.TabListener {
+public class StaticFragment extends ActionBarActivity implements ActionBar.TabListener {
 
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide fragments for each of the sections. We use a

@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/hellocharts-library" />
             <option value="$PROJECT_DIR$/hellocharts-samples" />
+            <option value="$PROJECT_DIR$/db_lib" />
           </set>
         </option>
       </GradleProjectSettings>

@@ -25,7 +25,7 @@ public class StudyFragment extends Fragment {
 
     private void setLodeSetting() {
         try {
-            saveSetting = new AutoSaveSetting("/mnt/sdcard/texxxxxxxxt.txt");
+            saveSetting = new AutoSaveSetting("/mnt/sdcard/setting.txt");
         } catch (Exception e) {
             e.printStackTrace();
         }
