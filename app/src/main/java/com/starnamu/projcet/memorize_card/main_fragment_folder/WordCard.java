@@ -10,6 +10,12 @@ public class WordCard {
     private int Level = 1;
     private String Translate;
 
+    public WordCard(String word, int level, String translate) {
+        Word = word;
+        Level = level;
+        Translate = translate;
+    }
+
     public String getWord() {
         return Word;
     }

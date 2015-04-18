@@ -11,28 +11,13 @@ import java.util.ArrayList;
  */
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
-    private ArrayList<WordCard> wordCardArrayList = new ArrayList<WordCard>();
-
+    private ArrayList<WordCard> wordCardArrayList;
 
     public static int ToDayWordCounter;
 
-   /* public void setToDayWordCounter(int toDayWordCounter) {
-        ToDayWordCounter = toDayWordCounter;
-    }*/
-
-    public ViewPagerAdapter(FragmentManager fm) {
+    public ViewPagerAdapter(FragmentManager fm, ArrayList<WordCard> wordCardArrayList) {
         super(fm);
-        init();
-    }
-
-    public void init() {
-        for (int i = 0; i < ToDayWordCounter; i++) {
-            WordCard wordCard = new WordCard();
-            wordCard.setWord(Vocabulary.Word[i]);
-            wordCard.setLevel(1);
-            wordCard.setTranslate(Vocabulary.Translate[i]);
-            wordCardArrayList.add(wordCard);
-        }
+        this.wordCardArrayList = wordCardArrayList;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.starnamu.projcet.memorize_card.fragment_folder;
+package com.starnamu.projcet.memorize_card.database_folder;
 
 import android.content.Context;
 import android.database.Cursor;

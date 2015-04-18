@@ -42,8 +42,6 @@ public class SideFragment extends Fragment {
         Setting.setOnClickListener(onClickListener);
         Statistics = (Button) view.findViewById(R.id.Statistics);
         Statistics.setOnClickListener(onClickListener);
-        DBControl = (Button) view.findViewById(R.id.DBControl);
-        DBControl.setOnClickListener(onClickListener);
     }
 
     /**
